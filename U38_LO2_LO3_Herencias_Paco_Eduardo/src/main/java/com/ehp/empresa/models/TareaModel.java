@@ -2,11 +2,14 @@ package com.ehp.empresa.models;
 
 import java.sql.Date;
 
+import com.ehp.empresa.entities.Empleado;
+
 public class TareaModel {
 	
 	private String titulo, descripcion, estado;
 	private long id;
 	private Date fecha;
+	private Empleado empleado;
 	
 	// Getters & Setters
 	public String getTitulo() {
@@ -38,5 +41,11 @@ public class TareaModel {
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 }

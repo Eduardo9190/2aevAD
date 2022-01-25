@@ -17,6 +17,7 @@ public class TareaConverter {
 		tareaModel.setDescripcion(tarea.getDescripcion());
 		tareaModel.setFecha(tarea.getFechaI());
 		tareaModel.setEstado(tarea.getEstado());
+		tareaModel.setEmpleado(tarea.getEmpleado());
 		return tareaModel;
 	}
 	
