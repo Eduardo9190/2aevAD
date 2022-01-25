@@ -2,6 +2,7 @@ package com.ehp.empresa.converters;
 
 import org.springframework.stereotype.Component;
 
+import com.ehp.empresa.entities.Empleado;
 import com.ehp.empresa.entities.Tarea;
 import com.ehp.empresa.models.TareaModel;
 
@@ -27,6 +28,8 @@ public class TareaConverter {
 		tarea.setDescripcion(tareaModel.getDescripcion());
 		tarea.setFechaI(tareaModel.getFecha());
 		tarea.setEstado(tareaModel.getEstado());
+		Empleado empleado = new Empleado();
+		tarea.setEmpleado(empleado);
 		return tarea;
 	}
 }
