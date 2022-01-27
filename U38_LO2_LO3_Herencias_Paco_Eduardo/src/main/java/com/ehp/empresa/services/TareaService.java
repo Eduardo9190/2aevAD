@@ -7,10 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ehp.empresa.TareaRepository;
 import com.ehp.empresa.converters.TareaConverter;
 import com.ehp.empresa.entities.Tarea;
 import com.ehp.empresa.models.TareaModel;
+import com.ehp.empresa.repositories.TareaRepository;
 
 @Service
 public class TareaService {

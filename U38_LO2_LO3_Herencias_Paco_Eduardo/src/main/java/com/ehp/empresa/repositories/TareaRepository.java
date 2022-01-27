@@ -1,4 +1,4 @@
-package com.ehp.empresa;
+package com.ehp.empresa.repositories;
 
 import java.util.List;
 
