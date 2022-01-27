@@ -41,11 +41,32 @@ public class TareaService {
 		return tareasModel;
 	}
 	
+	public Optional<TareaModel> buscarTarea(long id) {
+		Optional<Tarea> tarea = tareaRepository.findById(id);
+		Optional<TareaModel> tareaModel = Optional.empty();
+		if (tarea.isPresent()) {
+			tareaModel = Optional.of(tareaConverter.entityToModel(tarea.get()));
+		}
+		return tareaModel;
+	}
 	
-	//public boolean cambiarEstadoTarea() {}
 	
 	public boolean addTarea(TareaModel tareaModel) {
 		Tarea tarea = tareaConverter.modelToEntity(tareaModel);
+		tareaRepository.save(tarea);
+		return true;
+	}
+	
+	public boolean modifyTarea(TareaModel tareaModel) {
+		Tarea tarea = tareaConverter.modelToEntity(tareaModel);
+		String estado = tarea.getEstado();
+		if(estado.matches("pendiente")) {
+			tarea.setEstado("en progreso");
+		} else if (estado.matches("en progreso")) {
+			tarea.setEstado("completada");
+		} else {
+			return false;
+		}
 		tareaRepository.save(tarea);
 		return true;
 	}

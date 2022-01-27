@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +40,21 @@ public class TareaController {
 			throw new BadRequestException();
 		}
 	}
+	
+	@PutMapping(path="/tarea/{id}")
+	public TareaModel modificarEstadoTarea(@PathVariable(name="id") long id) {
+		Optional<TareaModel> tareaModel = tareaService.buscarTarea(id);
+		if(tareaModel.isPresent()) {
+			if(tareaService.modifyTarea(tareaModel.get())) {
+				return  tareaService.buscarTarea(id).get();
+			} else {
+				throw new BadRequestException();
+			}
+		} else {
+			throw new NotFoundException();
+		}
+	}
+	
 	
 	@DeleteMapping(path="/tarea/{id}")
 	public TareaModel tareaModel(@PathVariable(name="id") long id) {

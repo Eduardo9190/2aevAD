@@ -40,4 +40,14 @@ public class EmpleadoModel {
 	public void setTareas(List<Tarea> tareas) {
 		this.tareas = tareas;
 	}
+	
+	public EmpleadoModel getDatos() {
+		EmpleadoModel eM = new EmpleadoModel();
+		eM.setEmail(email);
+		eM.setNombre(nombre);
+		eM.setApellidos(apellidos);
+		eM.setContraseña("**************");
+		eM.setTareas(tareas);
+		return eM;
+	}
 }
