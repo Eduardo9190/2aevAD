@@ -48,4 +48,12 @@ public class TareaModel {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
+	
+	// Validations
+	public boolean validation(TareaModel tm) {
+		if (titulo.isBlank() || descripcion.isBlank() || estado.isBlank()) {
+			return false;
+		}
+		return true;
+	}
 }

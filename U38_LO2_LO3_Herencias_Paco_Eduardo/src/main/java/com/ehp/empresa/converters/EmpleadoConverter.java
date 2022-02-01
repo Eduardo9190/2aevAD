@@ -7,11 +7,14 @@ import org.springframework.stereotype.Component;
 import com.ehp.empresa.entities.Empleado;
 import com.ehp.empresa.entities.Tarea;
 import com.ehp.empresa.models.EmpleadoModel;
+import com.ehp.empresa.models.TareaModel;
 
 
 
 @Component
 public class EmpleadoConverter {
+	
+	TareaConverter tareaConverter;
 	
 	//Conversor de entidad a modelo
 	public EmpleadoModel entityToModel(Empleado empleado) {
@@ -20,7 +23,12 @@ public class EmpleadoConverter {
 		empleadoModel.setNombre(empleado.getNombre());
 		empleadoModel.setApellidos(empleado.getApellidos());
 		empleadoModel.setContraseña(empleado.getContraseña());
-		empleadoModel.setTareas(empleado.getTareas());
+		List<Tarea> tareas = empleado.getTareas();
+		List<TareaModel> tareasModel = null;
+		for (Tarea tarea:tareas) {
+			tareasModel.add(tareaConverter.entityToModel(tarea));
+		}
+		empleadoModel.setTareas(tareasModel);
 		return empleadoModel;
 	}
 	

@@ -25,7 +25,7 @@ public class EmpleadoController {
 	
 	@PostMapping(path="/empleado")
 	public void postEmpleado(@RequestBody EmpleadoModel empleadoModel) {
-		if(!empleadoService.addEmpleado(empleadoModel)) {
+		if(!empleadoModel.validation(empleadoModel) || !empleadoService.addEmpleado(empleadoModel)) {
 			throw new BadRequestException();
 		}
 	}

@@ -53,6 +53,10 @@ public class TareaService {
 	
 	public boolean addTarea(TareaModel tareaModel) {
 		Tarea tarea = tareaConverter.modelToEntity(tareaModel);
+		long id = tarea.getId();
+		if (tareaRepository.findById(id).isPresent()) {
+			return false;
+		}
 		tareaRepository.save(tarea);
 		return true;
 	}

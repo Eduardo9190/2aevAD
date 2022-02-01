@@ -36,7 +36,7 @@ public class TareaController {
 	
 	@PostMapping(path="/tarea")
 	public void postTarea(@RequestBody TareaModel tareaModel) {
-		if(!tareaService.addTarea(tareaModel)) {
+		if(!tareaModel.validation(tareaModel) || !tareaService.addTarea(tareaModel) ) {
 			throw new BadRequestException();
 		}
 	}
@@ -58,7 +58,6 @@ public class TareaController {
 	
 	@DeleteMapping(path="/tarea/{id}")
 	public TareaModel tareaModel(@PathVariable(name="id") long id) {
-		//Incluir validaciones
 		Optional<TareaModel> result = tareaService.deleteTarea(id);
 		if(result.isPresent()) {
 			return result.get();

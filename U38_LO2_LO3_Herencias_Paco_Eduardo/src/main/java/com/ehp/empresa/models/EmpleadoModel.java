@@ -7,7 +7,7 @@ import com.ehp.empresa.entities.Tarea;
 public class EmpleadoModel {
 	
 	private String email, nombre, apellidos, contraseña;
-	private List<Tarea> tareas;
+	private List<TareaModel> tareas;
 	
 	// Getters & Setters
 	public String getEmail() {
@@ -34,10 +34,10 @@ public class EmpleadoModel {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
-	public List<Tarea> getTareas() {
+	public List<TareaModel> getTareas() {
 		return tareas;
 	}
-	public void setTareas(List<Tarea> tareas) {
+	public void setTareas(List<TareaModel> tareas) {
 		this.tareas = tareas;
 	}
 	
@@ -49,5 +49,12 @@ public class EmpleadoModel {
 		eM.setContraseña("**************");
 		eM.setTareas(tareas);
 		return eM;
+	}
+	
+	public boolean validation(EmpleadoModel em) {
+		if (email.isBlank() || nombre.isBlank() || apellidos.isBlank() || contraseña.isBlank()) {
+			return false;
+		}
+		return true;
 	}
 }
