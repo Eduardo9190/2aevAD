@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:fil:./empresa
+    url: jdbc:h2:file:~/empresa
     username: user
     password: user
   jpa:

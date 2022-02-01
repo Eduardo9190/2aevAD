@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ehp.empresa.converters.TareaConverter;
 import com.ehp.empresa.entities.Tarea;
 import com.ehp.empresa.models.TareaModel;
+import com.ehp.empresa.repositories.EmpleadoRepository;
 import com.ehp.empresa.repositories.TareaRepository;
 
 @Service
@@ -17,6 +18,9 @@ public class TareaService {
 	
 	@Autowired
 	private TareaRepository tareaRepository;
+	
+	@Autowired
+	private EmpleadoRepository empleadoRepository;
 	
 	@Autowired
 	private TareaConverter tareaConverter;
@@ -39,6 +43,23 @@ public class TareaService {
 			tareasModel.add(tareaModel);
 		}
 		return tareasModel;
+	}
+	
+	public List<TareaModel> getTareasIndividuales(String email) {
+		List<Tarea> tareas = tareaRepository.findByEmail(email);
+		List<TareaModel> tareasModel = new ArrayList<>();
+		for (Tarea tarea:tareas) {
+			TareaModel tareaModel = tareaConverter.entityToModel(tarea);
+			tareasModel.add(tareaModel);
+		}
+		return tareasModel;
+	}
+	
+	public boolean findEmpleado(String email) {
+		if(!empleadoRepository.findByEmail(email)) {
+			return false;
+		}
+		return true;
 	}
 	
 	public Optional<TareaModel> buscarTarea(long id) {

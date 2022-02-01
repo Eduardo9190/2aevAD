@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ehp.empresa.errors.BadRequestException;
 import com.ehp.empresa.errors.NotFoundException;
 import com.ehp.empresa.models.TareaModel;
+import com.ehp.empresa.services.EmpleadoService;
 import com.ehp.empresa.services.TareaService;
 
 @RestController
@@ -23,7 +24,7 @@ public class TareaController {
 	
 	@Autowired
 	private TareaService tareaService;
-	
+			
 	@GetMapping(path="/tareas")
 	public List<TareaModel> getTareas(){
 		return tareaService.getTareas();
@@ -32,6 +33,14 @@ public class TareaController {
 	@GetMapping(path="/tareas/{estado}")
 	public List<TareaModel> getTareasPorEstado(@PathVariable(name="estado") String estado){
 		return tareaService.getTareasPorEstado(estado);
+	}
+	
+	@GetMapping(path="/tareas/{email}")
+	public List<TareaModel> getTareasIndividuales(@PathVariable(name="email") String email) {
+		if(!tareaService.findEmpleado(email)) {
+			throw new NotFoundException();
+		}
+		return tareaService.getTareasIndividuales(email);
 	}
 	
 	@PostMapping(path="/tarea")
