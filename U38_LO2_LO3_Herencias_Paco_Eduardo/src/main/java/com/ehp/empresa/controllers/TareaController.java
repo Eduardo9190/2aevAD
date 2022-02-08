@@ -31,6 +31,7 @@ public class TareaController {
 	
 	@GetMapping(path="/tareas/{estado}")
 	public List<TareaModel> getTareasPorEstado(@PathVariable(name="estado") String estado){
+		//comprobacion del estado recibido
 		return tareaService.getTareasPorEstado(estado);
 	}
 	
