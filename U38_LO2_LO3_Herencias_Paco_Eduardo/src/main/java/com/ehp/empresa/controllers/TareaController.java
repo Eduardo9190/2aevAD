@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ehp.empresa.errors.BadRequestException;
 import com.ehp.empresa.errors.NotFoundException;
 import com.ehp.empresa.models.TareaModel;
-import com.ehp.empresa.services.EmpleadoService;
 import com.ehp.empresa.services.TareaService;
 
 @RestController

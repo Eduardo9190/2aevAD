@@ -17,12 +17,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/* http.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/libro").permitAll()
-		.antMatchers(HttpMethod.GET, "/libro/*").hasAnyAuthority("ADMIN","USER")
+		
+		http.authorizeRequests()
+		.antMatchers(HttpMethod.GET, "/tareas").hasAnyAuthority("ADMIN")
+		.antMatchers(HttpMethod.GET, "/tareas/{estado}").hasAnyAuthority("ADMIN")
+		.antMatchers(HttpMethod.GET, "/tareas/{email}").hasAnyAuthority("ADMIN", "USER")
+		.antMatchers(HttpMethod.POST, "/tarea").hasAnyAuthority("ADMIN")
+		.antMatchers(HttpMethod.PUT, "/tarea/{id}").hasAnyAuthority("ADMIN", "USER")
+		.antMatchers(HttpMethod.DELETE, "/tarea/{id}").hasAnyAuthority("ADMIN")
+		.antMatchers(HttpMethod.GET, "/empleados").hasAnyAuthority("ADMIN")
+		.antMatchers(HttpMethod.POST, "/empleado").hasAnyAuthority("ADMIN")
 		.anyRequest().hasRole("ADMIN")
 		.and()
-		.httpBasic(); */
+		.httpBasic();
 	}
 	
 	@Bean
@@ -32,11 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder authentication) throws Exception {
-		//String pwdEncode = passwordEncoder().encode();
+		String pwdEncode = passwordEncoder().encode("12345");
 		
 		authentication.inMemoryAuthentication()
-		.withUser("Admin").password(null).authorities("ADMIN")
+		.withUser("Admin").password(pwdEncode).authorities("ADMIN")
 		.and()
-		.withUser("User").password(null).authorities("USER");
+		.withUser("User").password(pwdEncode).authorities("USER");
 	}
 }
