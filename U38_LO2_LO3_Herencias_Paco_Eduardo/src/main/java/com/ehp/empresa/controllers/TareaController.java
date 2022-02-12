@@ -35,7 +35,7 @@ public class TareaController {
 		return tareaService.getTareasPorEstado(estado);
 	}
 	
-	@GetMapping(path="/tareas/{email}")
+	@GetMapping(path="/tareasUser/{email}")
 	public List<TareaModel> getTareasIndividuales(@PathVariable(name="email") String email) {
 		if(!tareaService.findEmpleado(email)) {
 			throw new NotFoundException();

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.ehp.empresa.entities.Empleado;
 import com.ehp.empresa.entities.Tarea;
+import com.ehp.empresa.models.EmpleadoModel;
 import com.ehp.empresa.models.TareaModel;
 
 @Component
@@ -17,7 +18,9 @@ public class TareaConverter {
 		tareaModel.setDescripcion(tarea.getDescripcion());
 		tareaModel.setFecha(tarea.getFechaI());
 		tareaModel.setEstado(tarea.getEstado());
-		tareaModel.setEmpleado(tarea.getEmpleado());
+		EmpleadoModel empleadoModel = new EmpleadoModel();
+		empleadoModel.setEmail(tarea.getEmpleado().getEmail());
+		tareaModel.setEmpleadoModel(empleadoModel);
 		return tareaModel;
 	}
 	
@@ -30,6 +33,7 @@ public class TareaConverter {
 		tarea.setFechaI(tareaModel.getFecha());
 		tarea.setEstado(tareaModel.getEstado());
 		Empleado empleado = new Empleado();
+		empleado.setEmail(tareaModel.getEmpleadoModel().getEmail());
 		tarea.setEmpleado(empleado);
 		return tarea;
 	}

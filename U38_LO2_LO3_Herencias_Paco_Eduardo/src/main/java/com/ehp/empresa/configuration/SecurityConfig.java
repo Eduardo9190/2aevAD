@@ -21,13 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/tareas").hasAnyAuthority("ADMIN")
 		.antMatchers(HttpMethod.GET, "/tareas/*").hasAnyAuthority("ADMIN")
-		.antMatchers(HttpMethod.GET, "/tareas/*").hasAnyAuthority("ADMIN", "USER")
+		.antMatchers(HttpMethod.GET, "/tareasUsuario/*").hasAnyAuthority("ADMIN", "USER")
 		.antMatchers(HttpMethod.POST, "/tarea").hasAnyAuthority("ADMIN")
 		.antMatchers(HttpMethod.PUT, "/tarea/*").hasAnyAuthority("ADMIN", "USER")
 		.antMatchers(HttpMethod.DELETE, "/tarea/*").hasAnyAuthority("ADMIN")
 		.antMatchers(HttpMethod.GET, "/empleados").hasAnyAuthority("ADMIN")
 		.antMatchers(HttpMethod.POST, "/empleado").hasAnyAuthority("ADMIN")
-		.anyRequest().hasRole("ADMIN")
 		.and()
 		.httpBasic();
 	}

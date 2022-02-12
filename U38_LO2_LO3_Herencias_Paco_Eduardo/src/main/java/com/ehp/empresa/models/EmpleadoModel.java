@@ -2,11 +2,9 @@ package com.ehp.empresa.models;
 
 import java.util.List;
 
-import com.ehp.empresa.entities.Tarea;
-
 public class EmpleadoModel {
 	
-	private String email, nombre, apellidos, contraseña;
+	private String nombre, apellidos, email, contraseña;
 	private List<TareaModel> tareas;
 	
 	// Getters & Setters
