@@ -46,21 +46,20 @@ public class TareaService {
 	}
 	
 	public List<TareaModel> getTareasIndividuales(String email) {
-		List<Tarea> tareas = tareaRepository.findByEmail(email);
-		List<TareaModel> tareasModel = new ArrayList<>();
-		for (Tarea tarea:tareas) {
-			TareaModel tareaModel = tareaConverter.entityToModel(tarea);
-			tareasModel.add(tareaModel);
+		List<Tarea> tareas = null;
+		List<TareaModel> tareasModel = null;
+		if (empleadoRepository.existsById(email)) {
+			tareas = empleadoRepository.findById(email).get().getTareas();
+			tareasModel = new ArrayList<>();
+			for (Tarea tarea:tareas) {
+				TareaModel tareaModel = tareaConverter.entityToModel(tarea);
+				tareasModel.add(tareaModel);
+			}
 		}
 		return tareasModel;
 	}
 	
-	public boolean findEmpleado(String email) {
-		if(!empleadoRepository.findByEmail(email)) {
-			return false;
-		}
-		return true;
-	}
+	
 	
 	public Optional<TareaModel> buscarTarea(long id) {
 		Optional<Tarea> tarea = tareaRepository.findById(id);
